@@ -1,4 +1,4 @@
-# rollup-rewrite-imports
+# rollup-plugin-rewrite-imports
 
 Pass a string in to rewrite the path of ES module imports and dynamic imports
 
@@ -16,11 +16,11 @@ work independently of one another.
 ## Install
 
 ```
-$ npm install rollup-rewrite-imports --save-dev
+$ npm install rollup-plugin-rewrite-imports --save-dev
 ```
 or
 ```
-$ yarn add rollup-rewrite-imports --dev
+$ yarn add rollup-plugin-rewrite-imports --dev
 ```
 
 ## How to use
@@ -33,7 +33,7 @@ actually building these assets into.
 ```javascript
 const path = require('path');
 const autoExternal = require('rollup-plugin-auto-external');
-const rewriteImports = require('rollup-rewrite-imports');
+const rewriteImports = require('rollup-plugin-rewrite-imports');
 const production = true;
 module.exports = function() {
   return {
