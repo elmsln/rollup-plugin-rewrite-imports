@@ -1,0 +1,30 @@
+{
+  "name": "rollup-rewrite-imports",
+  "version": "1.0.0",
+  "description": "Append a string to esm import paths in rollup",
+  "author": "Bryan Ollendyke <mark@epiloque.com>",
+  "repository": "https://github.com/elmsln/rollup-rewrite-imports",
+  "keywords": [
+    "rollup",
+    "plugin",
+    "esm",
+    "imports",
+    "rollup-plugin"
+  ],
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/elmsln/rollup-rewrite-imports",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "files": [
+    "index.js"
+  ],
+  "main": "./index.js",
+  "dependencies": {
+    "magic-string": "^0.16.0"
+  },
+  "devDependencies": {
+    "rollup": "^0.36.3",
+    "tape": "^4.6.2"
+  }
+}
