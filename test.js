@@ -1,30 +1,45 @@
 import test from "ava";
 import rollupPluginRewriteImport from "./index";
 
-test("static import from", t => {
+function rollupTestMacro(t, input, expected) {
   const { renderChunk } = rollupPluginRewriteImport("example/");
-  t.deepEqual(renderChunk('import _ from "lodash";'), {
-    code: 'import _ from "example/lodash";'
-  });
-});
+  const processedInput = renderChunk(input);
+  const expectedResult = expected
+    ? {
+        code: expected
+      }
+    : expected;
+  t.deepEqual(processedInput, expectedResult);
+}
+rollupTestMacro.title = (_, input, expected) =>
+  `${input} becomes ${expected}`.trim();
 
-test("static import side effect", async t => {
-  const { renderChunk } = rollupPluginRewriteImport("example/");
-  t.deepEqual(renderChunk('import "side-effect";'), {
-    code: 'import "example/side-effect";'
-  });
-});
-
-test("dynamic import side effect", async t => {
-  const { renderChunk } = rollupPluginRewriteImport("example/");
-  t.deepEqual(renderChunk('import("side-effect");'), {
-    code: 'import("example/side-effect");'
-  });
-});
-
-test("dynamic import var", async t => {
-  const { renderChunk } = rollupPluginRewriteImport("example/");
-  t.deepEqual(renderChunk('const _ = await import("lodash");'), {
-    code: 'const _ = await import("example/lodash");'
-  });
-});
+test(
+  rollupTestMacro,
+  'import _ from "lodash";',
+  'import _ from "example/lodash";'
+);
+test(
+  rollupTestMacro,
+  'import _ from "lodash"',
+  'import _ from "example/lodash"'
+);
+test(rollupTestMacro, 'import "side-effect";', 'import "example/side-effect";');
+test(rollupTestMacro, 'import "side-effect"', 'import "example/side-effect"');
+test(
+  rollupTestMacro,
+  'import("side-effect");',
+  'import("example/side-effect");'
+);
+test(rollupTestMacro, 'import("side-effect")', 'import("example/side-effect")');
+test(
+  rollupTestMacro,
+  'const _ = await import("lodash");',
+  'const _ = await import("example/lodash");'
+);
+test(
+  rollupTestMacro,
+  'const _ = await import("lodash")',
+  'const _ = await import("example/lodash")'
+);
+test(rollupTestMacro, 'let variable = importLikeFunctionName("test")', null);
