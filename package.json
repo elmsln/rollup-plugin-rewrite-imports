@@ -19,11 +19,15 @@
   "files": [
     "index.js"
   ],
+  "scripts": {
+    "test": "ava"
+  },
   "main": "./index.js",
   "dependencies": {
     "magic-string": "^0.16.0"
   },
   "devDependencies": {
+    "ava": "^1.4.1",
     "rollup": "^0.36.3",
     "tape": "^4.6.2"
   }
