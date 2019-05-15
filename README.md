@@ -33,7 +33,7 @@ actually building these assets into.
 ```javascript
 const path = require('path');
 const autoExternal = require('rollup-plugin-auto-external');
-const rewriteImports = require('rollup-plugin-post-replace');
+const rewriteImports = require('rollup-rewrite-imports');
 const production = true;
 module.exports = function() {
   return {
